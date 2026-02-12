@@ -41,12 +41,12 @@ def track_scan(request, code):
         )
 
         # Redirect to landing page (set via environment variable)
-        landing_url = os.getenv('LANDING_PAGE_URL', 'https://braglty.com')
+        landing_url = os.getenv('LANDING_PAGE_URL', 'https://bragtly.com')
         return redirect(landing_url)
     except Exception as e:
         # Log the error and return a simple response
         print(f"Error in track_scan: {str(e)}")
-        return redirect('https://braglty.com')
+        return redirect('https://bragtly.com')
 
 
 @api_view(['GET'])
