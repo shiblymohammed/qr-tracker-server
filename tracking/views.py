@@ -31,17 +31,22 @@ def health_check(request):
 
 
 def track_scan(request, code):
-    location = get_object_or_404(Location, code=code)
+    try:
+        location = get_object_or_404(Location, code=code)
 
-    Scan.objects.create(
-        location=location,
-        ip_address=request.META.get('REMOTE_ADDR'),
-        user_agent=request.META.get('HTTP_USER_AGENT')
-    )
+        Scan.objects.create(
+            location=location,
+            ip_address=request.META.get('REMOTE_ADDR'),
+            user_agent=request.META.get('HTTP_USER_AGENT')
+        )
 
-    # Redirect to landing page (set via environment variable)
-    landing_url = os.getenv('LANDING_PAGE_URL', 'http://localhost:5173')
-    return redirect(landing_url)
+        # Redirect to landing page (set via environment variable)
+        landing_url = os.getenv('LANDING_PAGE_URL', 'https://braglty.com')
+        return redirect(landing_url)
+    except Exception as e:
+        # Log the error and return a simple response
+        print(f"Error in track_scan: {str(e)}")
+        return redirect('https://braglty.com')
 
 
 @api_view(['GET'])
