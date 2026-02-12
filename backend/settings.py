@@ -120,4 +120,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Landing page URL for QR code redirects
+LANDING_PAGE_URL = os.getenv('LANDING_PAGE_URL', 'https://bragtly.com')
+
 

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from django.db.models import Count
 from .serializers import LocationSerializer
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 User = get_user_model()
 
@@ -41,8 +42,8 @@ def track_scan(request, code):
         )
 
         # Redirect to landing page (set via environment variable)
-        landing_url = os.getenv('LANDING_PAGE_URL', 'https://bragtly.com')
-        print(f"LANDING_PAGE_URL from env: {landing_url}")  # Debug log
+        landing_url = getattr(settings, 'LANDING_PAGE_URL', 'https://bragtly.com')
+        print(f"LANDING_PAGE_URL from settings: {landing_url}")  # Debug log
         return redirect(landing_url)
     except Exception as e:
         # Log the error and return a simple response
