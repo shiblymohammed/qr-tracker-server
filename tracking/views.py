@@ -39,7 +39,9 @@ def track_scan(request, code):
         user_agent=request.META.get('HTTP_USER_AGENT')
     )
 
-    return redirect("http://localhost:5173")
+    # Redirect to landing page (set via environment variable)
+    landing_url = os.getenv('LANDING_PAGE_URL', 'http://localhost:5173')
+    return redirect(landing_url)
 
 
 @api_view(['GET'])
