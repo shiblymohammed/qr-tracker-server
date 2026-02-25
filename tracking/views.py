@@ -31,7 +31,7 @@ def health_check(request):
         }, status=500)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'HEAD'])
 @permission_classes([AllowAny])
 def uptime_check(request):
     """Lightweight health check for Uptime Robot - no DB queries"""
