@@ -31,6 +31,13 @@ def health_check(request):
         }, status=500)
 
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def uptime_check(request):
+    """Lightweight health check for Uptime Robot - no DB queries"""
+    return Response({'status': 'ok'}, status=200)
+
+
 def track_scan(request, code):
     try:
         location = get_object_or_404(Location, code=code)
